@@ -1930,7 +1930,7 @@ the specific language governing permissions and limitations under the Apache Lic
                 }
 
                 if (this.opts.openOnEnter === false && e.which === KEY.ENTER) {
-                    killEvent(e);
+//                    killEvent(e);
                     return;
                 }
 

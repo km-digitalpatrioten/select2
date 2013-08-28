@@ -1669,7 +1669,9 @@ the specific language governing permissions and limitations under the Apache Lic
 
         // abstract
         focusSearch: function () {
-            focus(this.search);
+            if(this.opts.minimumResultsForSearch > 0){
+                focus(this.search);
+            }
         },
 
         // abstract
@@ -1822,7 +1824,10 @@ the specific language governing permissions and limitations under the Apache Lic
                 range.select();
             } else if (el.setSelectionRange) {
                 len = this.search.val().length;
-                el.setSelectionRange(len, len);
+                if(this.opts.minimumResultsForSearch > 0){
+                    el.setSelectionRange(len, len);
+                }
+                
             }
 
             this.focusser.prop("disabled", true).val("");
@@ -2411,7 +2416,9 @@ the specific language governing permissions and limitations under the Apache Lic
             var _this = this;
             this.selection.on("click", ".select2-search-choice", function (e) {
                 //killEvent(e);
-                _this.search[0].focus();
+                if(_this.opts.minimumResultsForSearch > 0 ){
+                    _this.search[0].focus();
+                }
                 _this.selectChoice($(this));
             });
 

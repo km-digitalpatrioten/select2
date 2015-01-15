@@ -1669,9 +1669,7 @@ the specific language governing permissions and limitations under the Apache Lic
 
         // abstract
         focusSearch: function () {
-            if(this.opts.minimumResultsForSearch > 0){
-                focus(this.search);
-            }
+            focus(this.search);
         },
 
         // abstract
@@ -1778,7 +1776,7 @@ the specific language governing permissions and limitations under the Apache Lic
                 "   <span class='select2-chosen'>&nbsp;</span><abbr class='select2-search-choice-close'></abbr>",
                 "   <span class='select2-arrow'><b></b></span>",
                 "</a>",
-                "<input class='select2-focusser select2-offscreen' type='hidden'/>",
+                "<input class='select2-focusser select2-offscreen' type='text'/>",
                 "<div class='select2-drop select2-display-none'>",
                 "   <div class='select2-search'>",
                 "       <input type='text' autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' class='select2-input'/>",
@@ -1812,9 +1810,7 @@ the specific language governing permissions and limitations under the Apache Lic
 
                 this.search.val(this.focusser.val());
             }
-            if(this.opts.minimumResultsForSearch > 0) {
-                this.search.focus();
-            }
+            this.search.focus();
             // move the cursor to the end after focussing, otherwise it will be at the beginning and
             // new text will appear *before* focusser.val()
             el = this.search.get(0);
@@ -1824,10 +1820,7 @@ the specific language governing permissions and limitations under the Apache Lic
                 range.select();
             } else if (el.setSelectionRange) {
                 len = this.search.val().length;
-                if(this.opts.minimumResultsForSearch > 0){
-                    el.setSelectionRange(len, len);
-                }
-                
+                el.setSelectionRange(len, len);
             }
 
             this.focusser.prop("disabled", true).val("");
@@ -1924,9 +1917,7 @@ the specific language governing permissions and limitations under the Apache Lic
                 // without this the search field loses focus which is annoying
                 if (document.activeElement === this.body().get(0)) {
                     window.setTimeout(this.bind(function() {
-                        if(this.opts.minimumResultsForSearch > 0) {
-                            this.search.focus();
-                        }
+                        this.search.focus();
                     }), 0);
                 }
             }));
@@ -1995,11 +1986,7 @@ the specific language governing permissions and limitations under the Apache Lic
                 killEvent(e);
             }));
 
-            dropdown.on("mousedown", this.bind(function() {
-                if(this.opts.minimumResultsForSearch > 0) {
-                    this.search.focus();
-                }
-            }));
+            dropdown.on("mousedown", this.bind(function() { this.search.focus(); }));
 
             selection.on("focus", this.bind(function(e) {
                 killEvent(e);
@@ -2416,9 +2403,7 @@ the specific language governing permissions and limitations under the Apache Lic
             var _this = this;
             this.selection.on("click", ".select2-search-choice", function (e) {
                 //killEvent(e);
-                if(_this.opts.minimumResultsForSearch > 0 ){
-                    _this.search[0].focus();
-                }
+                _this.search[0].focus();
                 _this.selectChoice($(this));
             });
 
@@ -2641,10 +2626,7 @@ the specific language governing permissions and limitations under the Apache Lic
             this.focusSearch();
 
             this.updateResults(true);
-            if(this.opts.minimumResultsForSearch > 0) {
-                this.search.focus();
-            }
-            
+            this.search.focus();
             this.opts.element.trigger($.Event("select2-open"));
         },
 
@@ -2657,9 +2639,7 @@ the specific language governing permissions and limitations under the Apache Lic
         // multi
         focus: function () {
             this.close();
-            if(this.opts.minimumResultsForSearch > 0) {
-                this.search.focus();
-            }
+            this.search.focus();
         },
 
         // multi
